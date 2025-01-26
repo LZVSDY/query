@@ -52,19 +52,23 @@
   }
 
   .image-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
-  .image-box {
-    border: 1px solid #000;
-    width: 45%;
-    height: auto;
-    max-height: 512px;
-    max-width: 512px;
-    margin: 30px 30px;
-  }
+        display: flex;
+        flex-wrap: wrap;  /* 让图片框在超出一行时换行 */
+        justify-content: center;
+        align-items: center;
+    }
+    .image-box {
+        border: 1px solid #000;
+        width: 45%;        /* 每个图片框宽度为45%（两张图片在一行显示） */
+        height: auto;
+        max-height: 512px;
+        max-width: 512px;
+        margin: 30px 30px;
+        position: relative;
+        display: flex;            /* 使图片框成为flex容器 */
+        justify-content: center;  /* 水平居中图片 */
+        align-items: center;      /* 垂直居中图片 */
+    }
   .image-container .image-box:nth-child(1) {
     border: 10px solid blue; 
    }
@@ -80,6 +84,23 @@
    .image-container .image-box:nth-child(4) {
     border: 10px solid green; 
    }
+   .image-box img {
+        max-width: 100%;      /* 保证图片宽度不会超出容器 */
+        max-height: 100%;     /* 保证图片高度不会超出容器 */
+        object-fit: contain;  /* 保证图片不失真地填充容器 */
+    }
+    .image-container .image-number {
+        position: absolute;
+        bottom: -60px;  /* 将序号放置在图片框下方，距离底部 60px */
+        left: 50%;     /* 序号水平居中 */
+        transform: translateX(-50%);  /* 完全居中 */
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.5);  /* 半透明黑色背景 */
+        padding: 5px;
+        border-radius: 5px;
+    }
 
   .preferences {
     text-align: center;
@@ -156,36 +177,36 @@
         color: white;
     }
 
-    #layout1:checked::after{
+    #details1:checked::after{
         background-color: blue;
         color: white;
     }
-    #layout2:checked::after{
+    #details2:checked::after{
         background-color: orange;
         color: white;
     }
-    #layout3:checked::after{
+    #details3:checked::after{
         background-color: red;
         color: white;
     }
-    #layout4:checked::after{
+    #details4:checked::after{
         background-color: green;
         color: white;
     }
 
-    #bg1:checked::after{
+    #similarity1:checked::after{
         background-color: blue;
         color: white;
     }
-    #bg2:checked::after{
+    #similarity2:checked::after{
         background-color: orange;
         color: white;
     }
-    #bg3:checked::after{
+    #similarity3:checked::after{
         background-color: red;
         color: white;
     }
-    #bg4:checked::after{
+    #similarity4:checked::after{
         background-color: green;
         color: white;
     }
@@ -345,33 +366,33 @@
     <div class="highlight-block">
         <h2 data-lang-key="overalltitle">整体说明</h2>
         <ul data-lang-key="overalltext">
-            这是一个用户评估实验，旨在衡量两种图像压缩生成方法之间的效果，以比较两种方法在多项指标下的人类偏好。本实验主要关注于以下四个重点指标：
-            <li> 原图相似度：这一项指标需要评价哪种方法生成的图像和原图更贴近。</li> 
-            <li> 图片纹理保留程度：需要评价您认为那种方式生成的图片纹理效果更好。 </li> 
-            <li> 图片细节保留程度：需要评价您认为那种方式生成的图片细节效果更好。 </li> 
-            <li> 整体美观度：需要评价您认为那种方式生成的图片更美观。 </li> 
+            这是一个<b>用户评估实验</b>，旨在衡量四种图像压缩生成方法之间的效果，以比较四种方法在多项指标下的人类偏好。本实验主要关注于以下四个重点<b>指标</b>：
+            <li> <b>原图相似度</b>：这一项指标需要评价哪种方法生成的图像和原图更贴近。</li> 
+            <li> <b>图片纹理保留程度</b>：需要评价您认为那种方式生成的图片纹理效果更好。 </li> 
+            <li> <b>图片细节保留程度</b>：需要评价您认为那种方式生成的图片细节效果更好。 </li> 
+            <li> <b>整体美观度</b>：需要评价您认为那种方式生成的图片更美观。 </li> 
             再次感谢您的参与！</ul>
     </div>
     <div class="highlight-block">
         <h2 data-lang-key="evaluationpipeline">评估流程</h2>
         <ul>
-            <li data-lang-key="starteval">点击 '开始评测' 按钮进入主评估页面。</li>
-            <li data-lang-key="readintention">正上方图片为原图，下方两张图片为两种图像压缩生成方法实验结果，请对下方两张图的评估，在不同指标上选择更有优势的一张图片。左图标为1，右图标为2。</li>
+            <li data-lang-key="starteval">点击 <b>'开始评测'</b> 按钮进入主评估页面。</li>
+            <li data-lang-key="readintention"><b>正上方图片为原图</b>，下方四张图片为四种图像压缩生成方法实验结果，请对下方四张图的评估，在不同指标上<b>选择更有优势的一张图片。</b></li>
             <li data-lang-key="usenavigation">使用 '上一张' 和 '下一张' 按钮继续进行下一对图像的评估。</li>
-            <li data-lang-key="completeeval">评估完成后，点击底部的 '前往总结页面' 按钮结束评估。</li>
-            <li data-lang-key="checkmissed">请先检查是否有遗漏的图像评估。如果有，您可以点击 '返回评估'。在底部滑块中输入相应的索引号，切换到特定的图像对，并完成遗漏的评估。</li>
-            <li data-lang-key="sendresults">如果所有评估都完成了，请点击 '发送结果' 按钮通过邮件将结果发送给我们。</li>
+            <li data-lang-key="completeeval"><b>评估完成后</b>，点击底部的 <b>'前往总结页面'</b> 按钮结束评估。</li>
+            <li data-lang-key="checkmissed">请先检查是否有<b>遗漏</b>的图像评估。如果有，您可以点击 <b>'返回评估'</b>。在底部滑块中输入相应的索引号，切换到特定的图像对，并完成遗漏的评估。</li>
+            <li data-lang-key="sendresults">如果所有<b>评估都完成</b>了，请点击 <b>'发送结果'</b> 按钮通过邮件将结果发送给我们。</li>
         </ul>
     </div>
     <div class="highlight-block">
         <h2 data-lang-key="keynotes">关键提示</h2>
         <ul>
-            <li data-lang-key="visualappealnote">评估前可以先清除历史记录，以避免和其他评测冲突。</li>
+            <li data-lang-key="visualappealnote">评估前可以先<b>清除历史记录</b>，以避免和其他评测冲突。</li>
             <li data-lang-key="recommendationnote">我们强烈建议使用电脑作为终端，并使用Edge浏览器打开网页，以获得最佳体验。</li>
             <li data-lang-key="resumingnote">本网页支持从中断处继续评估。如果不小心关闭了网页，请不必担心，只需在同一浏览器中重新打开即可继续。</li>
-            <li data-lang-key="networknote">由于网络原因，图片不一定及时加载。如果图片已完全加载，背景将呈现浅绿色；如果图片未完全加载，则背景将呈现浅黄色。请在背景变为浅绿色后进行评估。</li>
-            <li data-lang-key="shuffleimagesnote">图片顺序已进行混淆，即左边的图片并不一定来自一个图像生成器，右边的图片来自另一个。</li>
-            <li data-lang-key="sendresultsnote">点击 '发送结果' 按钮将尝试通过Outlook发送电子邮件。如果无法访问Outlook，请不要惊慌，只需点击总结页面上的 '下载结果' 按钮，下载一个JSON文件，并将其发送给我们。</li>
+            <li data-lang-key="networknote">由于网络原因，图片不一定及时加载。<b>如果图片已完全加载，背景将呈现浅绿色；如果图片未完全加载，则背景将呈现浅黄色。请在背景变为浅绿色后进行评估。</b></li>
+            <li data-lang-key="shuffleimagesnote"><b>图片顺序已进行混淆</b>，即同一个颜色框内的图片，不一定来自同一个图像生成器。</li>
+            <li data-lang-key="sendresultsnote">点击 <b>'发送结果'</b> 按钮将尝试通过Outlook发送电子邮件。如果无法访问Outlook，请不要惊慌，只需点击总结页面上的 <b>'下载结果'</b> 按钮，下载一个JSON文件，并将其发送给我们。邮箱地址为：<b>2401210335@stu.pku.edu.cn</b> </li>
             <li data-lang-key="thankyounote"><b>非常感谢您对本实验的支持，图像压缩的历史将铭记您的贡献。</b></li>
         </ul>
     </div>
@@ -389,13 +410,24 @@
 
     
     <div class="image-container">
-      <img src="URL_TO_FIRST_IMAGE" alt="First Image" class="image-box" onerror="handleImageError()">
-      <!-- <div id="gray-image">Image not available</div> -->
-      <img src="URL_TO_SECOND_IMAGE" alt="Second Image" class="image-box" onerror="handleImageError()">
-      <!-- <div id="gray-image">Image not available</div> -->
-      <img src="URL_TO_SECOND_IMAGE" alt="Third Image" class="image-box" onerror="handleImageError()">
-      <img src="URL_TO_SECOND_IMAGE" alt="Fourth Image" class="image-box" onerror="handleImageError()">
+        <div class="image-box">
+            <img src="URL_TO_FIRST_IMAGE" alt="First Image" onerror="handleImageError()">
+            <div class="image-number">1</div>
+        </div>
+        <div class="image-box">
+            <img src="URL_TO_SECOND_IMAGE" alt="Second Image" onerror="handleImageError()">
+            <div class="image-number">2</div>
+        </div>
+        <div class="image-box">
+            <img src="URL_TO_THIRD_IMAGE" alt="Third Image" onerror="handleImageError()">
+            <div class="image-number">3</div>
+        </div>
+        <div class="image-box">
+            <img src="URL_TO_FOURTH_IMAGE" alt="Fourth Image" onerror="handleImageError()">
+            <div class="image-number">4</div>
+        </div>
     </div>
+    
     
     <button id="prevButton" class="button" onclick="changeImage(-1)">&#8592; 上一张</button>
     <button id="nextButton" class="button" onclick="changeImage(1)">下一张 &#8594;</button>
@@ -404,7 +436,7 @@
         <table align="center" cellspacing="20">
             <tr>
                 <td>
-                    <label><h3>原图相似度:</h3></label>
+                    <label><h3>整体美观度:</h3></label>
                                         <input type="radio" id="visual1" name="visual" value="1">
                     <label for="visual1">1</label>
                     <input type="radio" id="visual2" name="visual" value="2">
@@ -431,26 +463,26 @@
             <tr>
                 <td>
                     <label><h3>图片细节保留程度:</h3></label>
-                    <input type="radio" id="layout1" name="layout" value="1">
-                    <label for="layout1">1</label>
-                    <input type="radio" id="layout2" name="layout" value="2">
-                    <label for="layout2">2</label> 
-                    <input type="radio" id="layout3" name="layout" value="3">
-                    <label for="layout3">3</label>
-                    <input type="radio" id="layout4" name="layout" value="4">
-                    <label for="layout4">4</label>
+                    <input type="radio" id="details1" name="details" value="1">
+                    <label for="details1">1</label>
+                    <input type="radio" id="details2" name="details" value="2">
+                    <label for="details2">2</label> 
+                    <input type="radio" id="details3" name="details" value="3">
+                    <label for="details3">3</label>
+                    <input type="radio" id="details4" name="details" value="4">
+                    <label for="details4">4</label>
                 </td>
 
                 <td>
-                    <label><h3>整体美观度:</h3></label>
-                    <input type="radio" id="bg1" name="bg" value="1">
-                    <label for="bg1">1</label>
-                    <input type="radio" id="bg2" name="bg" value="2">
-                    <label for="bg2">2</label> 
-                    <input type="radio" id="bg3" name="bg" value="3">
-                    <label for="bg3">3</label>
-                    <input type="radio" id="bg4" name="bg" value="4">
-                    <label for="bg4">4</label>
+                    <label><h3>原图相似度:</h3></label>
+                    <input type="radio" id="similarity1" name="similarity" value="1">
+                    <label for="similarity1">1</label>
+                    <input type="radio" id="similarity2" name="similarity" value="2">
+                    <label for="similarity2">2</label> 
+                    <input type="radio" id="similarity3" name="similarity" value="3">
+                    <label for="similarity3">3</label>
+                    <input type="radio" id="similarity4" name="similarity" value="4">
+                    <label for="similarity4">4</label>
                 </td>
             </tr>
         </table>
@@ -475,8 +507,10 @@
 </div>
 
 <div id="conclusionPage" class="page">
-  <h1>THANK YOU!</h1>
-  <h3>THANK YOU VERY MUCH FOR YOUR SUPPORT IN THIS EXPERIMENT. THE HISTORY OF IMAGE COMPRESSION WILL REMEMBER YOUR CONTRIBUTION.</h3>
+  <h1>感谢您的参与！</h1>
+  <h2>请您点击下方 '发送结果' 按钮，将测评结果发送给我们！</h2>
+  <h2>如果不能发送结果，请您点击 '下载结果' 按钮，并将结果发送至邮箱: 2401210335@stu.pku.edu.cn</h2>
+  <h3>非常感谢您在本次实验中的支持！图像压缩的历史将铭记您的贡献！</h3>
   <div class="content">
     
     <div class="highlight-block">
@@ -782,7 +816,7 @@
     };
 
     function loadRatings() {
-     ['visual', 'text','layout','bg'].forEach((type) => {
+     ['visual', 'text','details','similarity'].forEach((type) => {
     // 构建存储时使用的键
     var key = type + 'Rating' + currentIndex;
     // 从localStorage获取评分值
@@ -803,46 +837,46 @@
 
 // Function to change the image pair
     function changeImage(direction) {
-    currentIndex += direction;
+        currentIndex += direction;
 
-    if (currentIndex < 0) {
-        currentIndex = images.length - 1;
-    } else if (currentIndex >= images.length) {
-        currentIndex = 0;
-    }
+        if (currentIndex < 0) {
+            currentIndex = images.length - 1;
+        } else if (currentIndex >= images.length) {
+            currentIndex = 0;
+        }
 
-    var imageElements = document.querySelectorAll('.image-box');
-    imageElements[0].src = images[currentIndex].img1;
-    imageElements[1].src = images[currentIndex].img2;
-    imageElements[2].src = images[currentIndex].img3;
-    imageElements[3].src = images[currentIndex].img4;
+        var imageElements = document.querySelectorAll('.image-box img');
+        imageElements[0].src = images[currentIndex].img1;
+        imageElements[1].src = images[currentIndex].img2;
+        imageElements[2].src = images[currentIndex].img3;
+        imageElements[3].src = images[currentIndex].img4;
 
-    // let titleWithBreaks = images[currentIndex].title.replace(/\n/g, '<br>');
-    // document.getElementById('imageTitle').textContent = images[currentIndex].title;
-    var titleImageURL = images[currentIndex].titleImage;
-    // document.getElementById('imageTitle').innerHTML = `<img src="${titleImageURL}" alt="Title Image" style="max-width:100%; height:auto;">`;
-    document.getElementById('imageTitle').innerHTML = `
-        <img src="${titleImageURL}" alt="Title Image" style="width:512px; height:512px; display:block; margin:0 auto;">
-    `;
+        // let titleWithBreaks = images[currentIndex].title.replace(/\n/g, '<br>');
+        // document.getElementById('imageTitle').textContent = images[currentIndex].title;
+        var titleImageURL = images[currentIndex].titleImage;
+        // document.getElementById('imageTitle').innerHTML = `<img src="${titleImageURL}" alt="Title Image" style="max-width:100%; height:auto;">`;
+        document.getElementById('imageTitle').innerHTML = `
+            <img src="${titleImageURL}" alt="Title Image" style="width:512px; height:512px; display:block; margin:0 auto;">
+        `;
 
-    loadRatings();
-    slider.value = currentIndex;
-    indexInput.value = currentIndex;
-    updateRadioButtons();
-    bindImageLoadEvent();
-    updateImageBackground();
+        loadRatings();
+        slider.value = currentIndex;
+        indexInput.value = currentIndex;
+        updateRadioButtons();
+        bindImageLoadEvent();
+        updateImageBackground();
     }
     
   function updateRadioButtons() {
     var visualRadios = document.querySelectorAll('input[name="visual"]');
     var textRadios = document.querySelectorAll('input[name="text"]');
-    var layoutRadios = document.querySelectorAll('input[name="layout"]');
-    var bgRadios = document.querySelectorAll('input[name="bg"]');
+    var detailsRadios = document.querySelectorAll('input[name="details"]');
+    var similarityRadios = document.querySelectorAll('input[name="similarity"]');
 
     resetRadios(visualRadios);
     resetRadios(textRadios);
-    resetRadios(layoutRadios);
-    resetRadios(bgRadios);
+    resetRadios(detailsRadios);
+    resetRadios(similarityRadios);
 
     if (ratings[currentIndex]) {
       if (ratings[currentIndex].visual) {
@@ -851,11 +885,11 @@
       if (ratings[currentIndex].text) {
         document.getElementById('text' + ratings[currentIndex].text).checked = true;
       }
-      if (ratings[currentIndex].layout) {
-        document.getElementById('layout' + ratings[currentIndex].layout).checked = true;
+      if (ratings[currentIndex].details) {
+        document.getElementById('details' + ratings[currentIndex].details).checked = true;
       }
-      if (ratings[currentIndex].bg) {
-        document.getElementById('bg' + ratings[currentIndex].bg).checked = true;
+      if (ratings[currentIndex].similarity) {
+        document.getElementById('similarity' + ratings[currentIndex].similarity).checked = true;
       }
     }
   }
@@ -870,14 +904,14 @@
     for (var i = 0; i < 200; i++) {
         var visualRating = localStorage.getItem('visualRating' + i);
         var textRating = localStorage.getItem('textRating' + i);
-        var layoutRating = localStorage.getItem('layoutRating' + i);
-        var bgRating = localStorage.getItem('bgRating' + i);
-        if (visualRating || textRating || layoutRating || bgRating) {
+        var detailsRating = localStorage.getItem('detailsRating' + i);
+        var similarityRating = localStorage.getItem('similarityRating' + i);
+        if (visualRating || textRating || detailsRating || similarityRating) {
             ratings[i] = {
                 visual: visualRating,
                 text: textRating,
-                layout: layoutRating,
-                bg: bgRating,
+                details: detailsRating,
+                similarity: similarityRating,
             };
         }
     }
@@ -904,15 +938,15 @@ document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
     };
     });
 
-    document.querySelectorAll('input[name="layout"]').forEach(function(radio) {
+    document.querySelectorAll('input[name="details"]').forEach(function(radio) {
         radio.onchange = function() {
-            saveRating('layout', this.value);
+            saveRating('details', this.value);
         };
         });
     
-        document.querySelectorAll('input[name="bg"]').forEach(function(radio) {
+        document.querySelectorAll('input[name="similarity"]').forEach(function(radio) {
         radio.onchange = function() {
-            saveRating('bg', this.value);
+            saveRating('similarity', this.value);
         };
         });
 
@@ -995,7 +1029,7 @@ function bindImageLoadEvent() {
           'welcometitle': 'Welcome to the COLE evaluation interface',
           'welcomesubtitle': "Together, let's revolutionize the world of graphic design and set new benchmarks for creativity and innovation!",
           'overalltitle': 'Overall Description',
-            'overalltext': "This is a user evaluation experiment designed to measure the success rate between two image generation methods, comparing human preferences across multiple metrics for two methods of generating <b>graphic design</b> type images (posters, greeting cards, flyers, images with interlaced text designed to convey specific information, etc.). The main focus of this experiment is to evaluate the quality of images generated by artificial intelligence, with a particular emphasis on the following four key metrics: <li> Text accuracy: Text is the core of design-type images. This metric evaluates which method generates text more accurately. The criteria include, but are not limited to, whether the font shapes are accurate without flaws and if they match the intended text as closely as possible.</li> <li> Aesthetic effect/image visual appeal and attractiveness: The visual appeal of an image is also an essential element of design-type images. This metric evaluates which method you prefer for the image effects produced, which is more visually appealing, and which better meets the aesthetic effects of design-type images.</li>            <li> Sense of design/layout rationality: Beyond text and images, the rationality of the design layout mainly measures whether the arrangement and layout of text and images are harmonious and reasonable. For example, whether text and graphic elements like text boxes are consistently placed, and whether there is any conflict between text and images.</li> <li> Background image prompt adherence: Whether the generated image and the background's text prompts are consistent. In your opinion, which method produces background images and background prompts that better match?</li> Thank you again for your participation!",
+            'overalltext': "This is a user evaluation experiment designed to measure the success rate between two image generation methods, comparing human preferences across multiple metrics for two methods of generating <b>graphic design</b> type images (posters, greeting cards, flyers, images with interlaced text designed to convey specific information, etc.). The main focus of this experiment is to evaluate the quality of images generated by artificial intelligence, with a particular emphasis on the following four key metrics: <li> Text accuracy: Text is the core of design-type images. This metric evaluates which method generates text more accurately. The criteria include, but are not limited to, whether the font shapes are accurate without flaws and if they match the intended text as closely as possible.</li> <li> Aesthetic effect/image visual appeal and attractiveness: The visual appeal of an image is also an essential element of design-type images. This metric evaluates which method you prefer for the image effects produced, which is more visually appealing, and which better meets the aesthetic effects of design-type images.</li>            <li> Sense of design/details rationality: Beyond text and images, the rationality of the design details mainly measures whether the arrangement and details of text and images are harmonious and reasonable. For example, whether text and graphic elements like text boxes are consistently placed, and whether there is any conflict between text and images.</li> <li> Background image prompt adherence: Whether the generated image and the background's text prompts are consistent. In your opinion, which method produces background images and background prompts that better match?</li> Thank you again for your participation!",
             'evaluationpipeline': 'Evaluation Pipeline',
             'starteval': "Click the 'Start Eval Trip' button to enter the main evaluation page.",
             'readintention': "Read the user intention (i.e., the input for the image generator) at the top of each page. Then, based on your assessment of the two images below, select the one that has the advantage in various criteria, where the left image is labeled as 1 and the right image as 2.",
